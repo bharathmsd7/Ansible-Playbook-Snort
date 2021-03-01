@@ -21,7 +21,7 @@
 # configure swatchrc and /etc/init/swatch.conf
 
     - name: Install Postfix and Swatch
-      apt: name={{item}} state=installed
+      apt: name={{item}} state=present
       become: yes
       with_items:
       - postfix
