@@ -1,4 +1,4 @@
-#- hosts: snortserver
+- hosts: snortserver
 
   #tasks:
     - name: Install Snort pre-requisites
