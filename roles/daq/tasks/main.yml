@@ -1,6 +1,6 @@
 - hosts: snortserver
 
-  #tasks:
+  tasks:
     - name: Install Snort pre-requisites
       become: yes
       apt: name={{item}} state=present
