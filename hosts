@@ -47,4 +47,4 @@
 #[snortserver]
 #172.31.89.26
 [snortserver]
-localhost ansible_connection=local
+#localhost ansible_connection=local
