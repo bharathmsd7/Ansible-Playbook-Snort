@@ -1,3 +1,5 @@
+
+---
 - hosts: snortserver
 
   tasks:
