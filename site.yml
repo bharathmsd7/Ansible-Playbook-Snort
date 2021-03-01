@@ -1,4 +1,7 @@
-- hosts: snortserver
+- hosts: all
+  gather_facts: true
+  become: yes
+  become_user: root
   roles:
 #     - nic_config
     - daq
