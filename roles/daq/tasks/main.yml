@@ -22,20 +22,20 @@
   - name: Download DAQ
     become: yes
     get_url:
-      url: https://www.snort.org/downloads/snort/daq-2.0.6.tar.gz
+      url: https://www.snort.org/downloads/snort/daq-2.0.7.tar.gz
       dest: /tmp/
     register: download_daq
 
   - name: Untar DAQ
     become: yes
-    unarchive: src=/tmp/daq-{{daq_version}}.tar.gz
+    unarchive: src=/tmp/daq-2.0.7.tar.gz
                dest=/opt/snort-src
                copy=no
     when: download_daq.changed
     register: untar_daq
 
   - name: Configure DAQ
-    command: chdir=/opt/snort-src/daq-2.0.6 {{item}}
+    command: chdir=/opt/snort-src/daq-2.0.7 {{item}}
     become: yes
     with_items:
     - "./configure"
