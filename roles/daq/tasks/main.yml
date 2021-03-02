@@ -22,7 +22,7 @@
   - name: Download DAQ
     become: yes
     get_url:
-      url: https://github.com/bharathmsd7/Ansible-Playbook-Snort/blob/main/daq-2.0.7.tar.gz
+      url: https://www.snort.org/downloads/snort/daq-2.0.7.tar.gz
       dest: /tmp/
     register: download_daq
 
