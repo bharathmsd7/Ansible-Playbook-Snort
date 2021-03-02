@@ -1,6 +1,6 @@
  - name: Install ethtool
    become: yes
-   apt: name=ethtool state=installed
+   apt: name=ethtool state=present
 
  - name: NIC configurations
    become: yes

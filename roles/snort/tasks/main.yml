@@ -3,20 +3,20 @@
 #  tasks:
     - name: Download Snort
       get_url: 
-        url: https://snort.org/downloads/snort/snort-{{snort_version}}.tar.gz
+        url: https://snort.org/downloads/snort/snort-2.9.9.0.tar.gz
         dest: /tmp
       register: download_snort
 
     - name: Untar Snort
       become: yes
-      unarchive: src=/tmp/snort-{{snort_version}}.tar.gz
+      unarchive: src=/tmp/snort-2.9.9.0.tar.gz
                  dest=/opt/snort-src
                  copy=no
       when: download_snort.changed
       register: untar_snort
 
     - name: Install Snort
-      command: chdir=/opt/snort-src/snort-{{snort_version}} {{item}}
+      command: chdir=/opt/snort-src/snort-2.9.9.0 {{item}}
       become: yes
       with_items:
       - "./configure --enable-sourcefire"
@@ -76,7 +76,7 @@
 
     - name: Copy Config files and dynamic preprocessors
       become: yes
-      command: cp /opt/snort-src/snort-{{snort_version}}/etc/{{item}} /etc/snort
+      command: cp /opt/snort-src/snort-2.9.9.0/etc/{{item}} /etc/snort
       with_items:
       - file_magic.conf
       - reference.config
@@ -90,7 +90,7 @@
     - name: Copy dynamic preprocessors
       become: yes
       synchronize:
-         src: /opt/snort-src/snort-{{snort_version}}/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/ 
+         src: /opt/snort-src/snort-2.9.9.0/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/ 
          dest: /usr/local/lib/snort_dynamicpreprocessor
       delegate_to: "{{ inventory_hostname }}"
       when: install_snort.changed

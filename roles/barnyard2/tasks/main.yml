@@ -2,7 +2,7 @@
 
 #  tasks:
     - name: Install Barnyard2 pre-requisites
-      apt: name={{item}} state=installed
+      apt: name={{item}} state=present
       become: yes
       with_items:
       - mysql-server 
@@ -15,12 +15,12 @@
     - name: Download Barnyard2
       get_url: 
         url: https://github.com/firnsy/barnyard2/archive/{{barnyard2_tarball}}.tar.gz
-        dest: /tmp/barnyard2-{{barnyard2_version}}.tar.gz
+        dest: /tmp/barnyard2-2-1.14.336.tar.gz
       #register: download_barnyard2
 
     - name: Untar Barnyard2 
       become: yes
-      unarchive: src=/tmp/barnyard2-{{barnyard2_version}}.tar.gz
+      unarchive: src=/tmp/barnyard2-2-1.14.336.tar.gz
                  dest=/opt/snort-src
                  copy=no mode=0755
                  #copy=no owner=flexiadmin group=flexiadmin mode=0755
@@ -29,13 +29,13 @@
 
     - name: Rename barnyard2 folder
       become: yes
-      command: mv /opt/snort-src/barnyard2-{{barnyard2_tarball}} /opt/snort-src/barnyard2-{{barnyard2_version}}
+      command: mv /opt/snort-src/barnyard2-{{barnyard2_tarball}} /opt/snort-src/barnyard2-2-1.14.336
       #when: untar_barnyard2.changed
       register: rename_barnyard2
 
     - name: Install Barnyard2
       become: yes
-      command: chdir=/opt/snort-src/barnyard2-{{barnyard2_version}} {{ item }}
+      command: chdir=/opt/snort-src/barnyard2-2-1.14.336 {{ item }}
       with_items:
       - "autoreconf -fvi -I ./m4"
       when: rename_barnyard2.changed
@@ -46,7 +46,7 @@
       become: yes
 
     - name: Configure Barnyard2
-      command: chdir=/opt/snort-src/barnyard2-{{barnyard2_version}} {{ item }}
+      command: chdir=/opt/snort-src/barnyard2-2-1.14.336 {{ item }}
       become: yes
       with_items:
       - "ldconfig"
@@ -67,7 +67,7 @@
 
     - name: Copy Config file
       become: yes
-      command: cp /opt/snort-src/barnyard2-{{barnyard2_version}}/etc/barnyard2.conf /etc/snort/barnyard2.conf
+      command: cp /opt/snort-src/barnyard2-2-1.14.336/etc/barnyard2.conf /etc/snort/barnyard2.conf
 
     - name: Barnyard2 Startup script
       become: yes

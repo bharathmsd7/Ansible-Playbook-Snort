@@ -1,4 +1,9 @@
-- hosts: snortserver
+- hosts: all
+  gather_facts: true
+  become: yes
+  become_user: root
+  vars_files:
+    - group_vars/snortserver
   roles:
 #     - nic_config
     - daq
